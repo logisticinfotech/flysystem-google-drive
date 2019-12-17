@@ -562,9 +562,12 @@ class GoogleDriveAdapter extends AbstractAdapter
      *
      * @return array
      */
-    public function listContents($dirname = '', $recursive = false)
+    public function listContents($dirname = '', $recursive = false, $maxResults = 0, $query = '')
     {
-        return $this->getItems($dirname, $recursive);
+        if(isset($_REQUEST['gdrive_search'])){
+            $query = 'name contains \''.$_REQUEST['gdrive_search'].'\'';
+        }
+        return $this->getItems($dirname, $recursive, $maxResults, $query);
     }
 
     /**
